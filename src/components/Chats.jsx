@@ -7,6 +7,8 @@ import { db } from "../firebase";
 const Chats = () => {
   const [chats, setChats] = useState([]);
 
+  console.log(chats);
+
   const { currentUser } = useContext(AuthContext);
   const { dispatch } = useContext(ChatContext);
 
@@ -26,7 +28,11 @@ const Chats = () => {
 
   const handleSelect = (u) => {
     dispatch({ type: "CHANGE_USER", payload: u });
+    console.log("U",u);
   };
+ 
+  
+
 
   return (
     <div className="chats">
