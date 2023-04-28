@@ -69,6 +69,7 @@ const Register = () => {
             <img src={Add} alt="" />
             <span>Add an Avatar</span>
           </label>
+          <p className="pass-text">Password length must be higher than 6</p>
           <button>Sign up</button>
           {err && <span>Something is wrong</span>}
         </form>

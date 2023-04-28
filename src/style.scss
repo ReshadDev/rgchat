@@ -94,6 +94,22 @@
       }
     }
   }
+
+  .d-none{
+    display: none;
+  }
+
+  .d-block{
+    display: block;
+  }
+
+
+  .pass-text{
+    color: red !important; 
+    font-weight: 600;
+    
+  }
+
   
   .home {
     background-color: #5676de;

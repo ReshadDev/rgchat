@@ -1,13 +1,14 @@
 import { doc, onSnapshot } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { map, toPairs } from "lodash";
 import { ChatContext } from "../context/ChatContext";
 import { db } from "../firebase";
 
 const Chats = () => {
   const [chats, setChats] = useState([]);
 
-  console.log(chats);
+  // console.log(chats);
 
   const { currentUser } = useContext(AuthContext);
   const { dispatch } = useContext(ChatContext);
@@ -28,24 +29,21 @@ const Chats = () => {
 
   const handleSelect = (u) => {
     dispatch({ type: "CHANGE_USER", payload: u });
-    console.log("U",u);
+    console.log("U", u);
   };
- 
-  
-
 
   return (
     <div className="chats">
-      {Object.entries(chats)?.sort((a,b)=>b[1].date - a[1].date).map((chat) => (
+      {map(toPairs(chats), ([username, chat]) => (
         <div
           className="userChat"
-          key={chat[0]}
-          onClick={() => handleSelect(chat[1].userInfo)}
+          key={username}
+          onClick={() => handleSelect(chat.userInfo)}
         >
-          <img src={chat[1].userInfo.photoURL} alt="" />
+          <img src={chat.userInfo.photoURL} alt="" />
           <div className="userChatInfo">
-            <span>{chat[1].userInfo.displayName}</span>
-            <p>{chat[1].lastMessage?.text}</p>
+            <span>{chat.userInfo.displayName}</span>
+            <p>{chat.lastMessage?.text}</p>
           </div>
         </div>
       ))}
